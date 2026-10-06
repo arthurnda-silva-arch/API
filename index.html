@@ -5,50 +5,118 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Consulta de CEP - ViaCEP</title>
   <style>
-    body {
-      font-family: Arial, sans-serif;
-      max-width: 500px;
-      margin: 50px auto;
-      padding: 20px;
-      border: 1px solid #ccc;
-      border-radius: 8px;
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
     }
+
+    body {
+      background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+      min-height: 100vh;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      padding: 20px;
+    }
+
+    .card {
+      background-color: #ffffff;
+      padding: 30px;
+      border-radius: 12px;
+      box-shadow: 0 8px 24px rgba(0, 0, 0, 0.1);
+      width: 100%;
+      max-width: 420px;
+      text-align: center;
+    }
+
+    h2 {
+      color: #333;
+      margin-bottom: 20px;
+      font-size: 1.5rem;
+    }
+
     .form-group {
+      display: flex;
+      gap: 8px;
       margin-bottom: 15px;
     }
+
     input {
-      padding: 8px;
-      width: 60%;
-      font-size: 16px;
+      flex: 1;
+      padding: 12px;
+      border: 1px solid #ccc;
+      border-radius: 6px;
+      font-size: 1rem;
+      outline: none;
+      transition: border-color 0.2s;
     }
+
+    input:focus {
+      border-color: #007bff;
+    }
+
     button {
-      padding: 8px 15px;
-      font-size: 16px;
-      cursor: pointer;
-    }
-    .erro {
-      color: red;
+      padding: 12px 18px;
+      background-color: #007bff;
+      color: #fff;
+      border: none;
+      border-radius: 6px;
+      font-size: 1rem;
       font-weight: bold;
+      cursor: pointer;
+      transition: background-color 0.2s;
     }
+
+    button:hover {
+      background-color: #0056b3;
+    }
+
+    .erro {
+      color: #d9534f;
+      font-weight: 600;
+      font-size: 0.9rem;
+      margin-top: 10px;
+    }
+
     .resultado {
       margin-top: 20px;
-      padding: 10px;
-      background-color: #f9f9f9;
+      padding: 15px;
+      background-color: #f8f9fa;
+      border-left: 4px solid #007bff;
       border-radius: 4px;
+      text-align: left;
+    }
+
+    .resultado p {
+      margin-bottom: 8px;
+      color: #495057;
+      font-size: 0.95rem;
+    }
+
+    .resultado p:last-child {
+      margin-bottom: 0;
+    }
+
+    .resultado strong {
+      color: #212529;
     }
   </style>
 </head>
 <body>
 
-  <h2>Busca de Endereço por CEP</h2>
-  
-  <div class="form-group">
-    <input type="text" id="cepInput" placeholder="Digite o CEP (ex: 01001000)" maxlength="8">
-    <button onclick="buscarCEP()">Buscar</button>
-  </div>
+  <div class="card">
+    <h2>Buscar Endereço</h2>
+    
+    <div class="form-group">
+      <input type="text" id="cepInput" placeholder="Digite o CEP (ex: 01001000)" maxlength="8">
+      <button onclick="buscarCEP()">Buscar</button>
+    </div>
 
-  <div id="mensagem" class="erro"></div>
-  <div id="resultado" class="resultado" style="display: none;"></div>
+    <div id="mensagem" class="erro"></div>
+    <div id="resultado" class="resultado" style="display: none;"></div>
+  </div>
 
   <script>
     async function buscarCEP() {
@@ -56,7 +124,6 @@
       const mensagemEl = document.getElementById('mensagem');
       const resultadoEl = document.getElementById('resultado');
 
-      // Limpar resultados anteriores
       mensagemEl.innerText = '';
       resultadoEl.style.display = 'none';
       resultadoEl.innerHTML = '';
